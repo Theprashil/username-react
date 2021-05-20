@@ -1,0 +1,44 @@
+.container {
+  /* border: 2px solid salmon; */
+  margin: 1rem;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+}
+.username input {
+  margin: 0.6rem 0rem;
+  border: 1px solid lightgrey;
+  font-size: 1.2rem;
+}
+
+.age {
+  font-weight: bold;
+  display: flex;
+  font-size: 1.3rem;
+  flex-direction: column;
+}
+
+.age input {
+  margin: 0.6rem 0rem;
+  font-size: 1.3rem;
+  border: 1px solid lightgrey;
+}
+
+.btn button {
+  text-align: center;
+  font-weight: bold;
+  padding: 0.7rem;
+  margin-top: 0.5rem;
+  background-color: rgba(128, 0, 128, 0.9);
+
+  color: white;
+}
+.btn button:hover {
+  background-color: rgba(128, 0, 128, 1);
+  color: white;
+  cursor: pointer;
+}
