@@ -6,8 +6,8 @@ import UserInputDisplay from "./components/UsersInput/UsersInputDisplay";
 const Dummy_data = [
   {
     id: "1",
-    name: "Max",
-    age: 31,
+    name: "Radhika",
+    age: 19,
   },
 
   {

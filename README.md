@@ -1,8 +1,6 @@
 ## Overview
 
-This repo contains a project which I built to learn about REACT.js
-
-I built this website using core concepts of REACT.js like
+I created this project to practise the basic concepts I learn't about REACT.js like
 
 - Components
 - CSS

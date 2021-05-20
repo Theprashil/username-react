@@ -9,16 +9,36 @@ it sends userData object to `UserInputDispaly`
 
 import styles from "./UsersInputForm.module.css";
 import { useState } from "react";
+import ErrorModal from "../UI/ErrorModal";
 
 function UsersInputForm(props) {
+  //This state is used to check if the overlay should be present or not
+  const [error, setError] = useState();
   function onSubmitHandler(event) {
     event.preventDefault();
     const userData = {
       name: currentUsername,
       age: currentAge,
     };
-    props.data(userData);
 
+    //Checking if the user has entered either username or age
+    if (currentUsername.trim().length === 0 || currentAge.trim().length === 0) {
+      setError({
+        title: "An error occured",
+        message: "Please enter valid username or age",
+      });
+      return;
+    }
+    //Checking if the age is less than 0
+    if (+currentAge < 1) {
+      setError({
+        title: "An error occured",
+        message: "Enter age above 0",
+      });
+      return;
+    }
+    //If the checks were success then the data is passed
+    props.data(userData);
     setCurrentUsername("");
     setCurrentAge("");
   }
@@ -28,29 +48,40 @@ function UsersInputForm(props) {
   function ageHandler(event) {
     setCurrentAge(event.target.value);
   }
-
+  function closeErrorModalHandler() {
+    setError(null);
+  }
   const [currentAge, setCurrentAge] = useState("");
   const [currentUsername, setCurrentUsername] = useState("");
   return (
-    <form onSubmit={onSubmitHandler}>
-      <div className={styles.container}>
-        <div className={styles.username}>
-          <label>Username</label>
-          <input
-            type="text"
-            value={currentUsername}
-            onChange={usernameHandler}
-          />
+    <div>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={closeErrorModalHandler}
+        />
+      )}
+      <form onSubmit={onSubmitHandler}>
+        <div className={styles.container}>
+          <div className={styles.username}>
+            <label>Username</label>
+            <input
+              type="text"
+              value={currentUsername}
+              onChange={usernameHandler}
+            />
+          </div>
+          <div className={styles.age}>
+            <label>Age (Years)</label>
+            <input type="number" value={currentAge} onChange={ageHandler} />
+          </div>
+          <div className={styles.btn}>
+            <button type="submit">Add User</button>
+          </div>
         </div>
-        <div className={styles.age}>
-          <label>Age (Years)</label>
-          <input type="number" value={currentAge} onChange={ageHandler} />
-        </div>
-        <div className={styles.btn}>
-          <button type="submit">Add User</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
 
