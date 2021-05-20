@@ -18,12 +18,17 @@ const Dummy_data = [
 ];
 
 function App() {
+  const finalUserInputData = (data) => {
+    setUser((prevUserData) => {
+      return [data, ...prevUserData];
+    });
+  };
   // adding functionality to add users later
   const [user, setUser] = useState(Dummy_data);
 
   return (
     <div className={styles.container}>
-      <UserInputDisplay />
+      <UserInputDisplay onRecieve={finalUserInputData} />
       <UserDisplay value={user} />
     </div>
   );

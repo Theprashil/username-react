@@ -12,7 +12,7 @@ import styles from "./UserDisplay.module.css";
 
 function UserDisplay(props) {
   let passDataToUserList = props.value.map((users) => (
-    <UserList name={users.name} age={users.age} />
+    <UserList key={users.id} name={users.name} age={users.age} />
   ));
 
   return <div className={styles.container}>{passDataToUserList}</div>;
