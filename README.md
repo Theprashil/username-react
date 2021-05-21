@@ -8,6 +8,7 @@ I created this project to practise the basic concepts I learn't about REACT.js l
 - useState
 - Fragments
 - Portals
+- Refs
 
 ## Installation
 

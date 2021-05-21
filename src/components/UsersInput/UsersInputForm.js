@@ -8,21 +8,30 @@ it sends userData object to `UserInputDispaly`
 */
 
 import styles from "./UsersInputForm.module.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ErrorModal from "../UI/ErrorModal";
 
 function UsersInputForm(props) {
+  //used ref instead of state management
+  const userNameInputRef = useRef();
+  const ageInputRef = useRef();
+
   //This state is used to check if the overlay should be present or not
   const [error, setError] = useState();
+
   function onSubmitHandler(event) {
     event.preventDefault();
+    //created two const where its value is stored upon submit instead of earlier onChange
+    const enteredUserName = userNameInputRef.current.value;
+    const enteredAge = ageInputRef.current.value;
+
     const userData = {
-      name: currentUsername,
-      age: currentAge,
+      name: enteredUserName,
+      age: enteredAge,
     };
 
     //Checking if the user has entered either username or age
-    if (currentUsername.trim().length === 0 || currentAge.trim().length === 0) {
+    if (enteredUserName.trim().length === 0 || enteredAge.trim().length === 0) {
       setError({
         title: "An error occured",
         message: "Please enter valid username or age",
@@ -30,7 +39,7 @@ function UsersInputForm(props) {
       return;
     }
     //Checking if the age is less than 0
-    if (+currentAge < 1) {
+    if (+enteredAge < 1) {
       setError({
         title: "An error occured",
         message: "Enter age above 0",
@@ -39,20 +48,14 @@ function UsersInputForm(props) {
     }
     //If the checks were success then the data is passed
     props.data(userData);
-    setCurrentUsername("");
-    setCurrentAge("");
+    //Resets the value of username and age upon submit
+    userNameInputRef.current.value = "";
+    ageInputRef.current.value = "";
   }
-  function usernameHandler(event) {
-    setCurrentUsername(event.target.value);
-  }
-  function ageHandler(event) {
-    setCurrentAge(event.target.value);
-  }
+
   function closeErrorModalHandler() {
     setError(null);
   }
-  const [currentAge, setCurrentAge] = useState("");
-  const [currentUsername, setCurrentUsername] = useState("");
   return (
     <>
       {error && (
@@ -66,15 +69,11 @@ function UsersInputForm(props) {
         <div className={styles.container}>
           <div className={styles.username}>
             <label>Username</label>
-            <input
-              type="text"
-              value={currentUsername}
-              onChange={usernameHandler}
-            />
+            <input type="text" ref={userNameInputRef} />
           </div>
           <div className={styles.age}>
             <label>Age (Years)</label>
-            <input type="number" value={currentAge} onChange={ageHandler} />
+            <input type="number" ref={ageInputRef} />
           </div>
           <div className={styles.btn}>
             <button type="submit">Add User</button>
