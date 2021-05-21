@@ -3,9 +3,11 @@
 I created this project to practise the basic concepts I learn't about REACT.js like
 
 - Components
-- CSS
+- CSS Modules
 - Props
 - useState
+- Fragments
+- Portals
 
 ## Installation
 

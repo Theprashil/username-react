@@ -54,7 +54,7 @@ function UsersInputForm(props) {
   const [currentAge, setCurrentAge] = useState("");
   const [currentUsername, setCurrentUsername] = useState("");
   return (
-    <div>
+    <>
       {error && (
         <ErrorModal
           title={error.title}
@@ -81,7 +81,7 @@ function UsersInputForm(props) {
           </div>
         </div>
       </form>
-    </div>
+    </>
   );
 }
 
